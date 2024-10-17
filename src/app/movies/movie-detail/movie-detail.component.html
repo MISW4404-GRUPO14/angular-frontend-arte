@@ -1,0 +1,145 @@
+<div class="movie-detail">
+  <div
+    class="movie-list d-md-block"
+    [ngClass]="{ 'd-none': !viewList, 'fixed-top': viewList }"
+  >
+    <div class="container fs-4 title" i18n="movie_list">Listado Películas</div>
+    <div class="container-fluid">
+      <div class="list-group">
+        <a
+          type="button"
+          class="list-group-item list-group-item-action"
+          routerLink="../{{ movie.id }}"
+          routerLinkActive="active"
+          *ngFor="let movie of allMovies"
+          [attr.aria-label]="aria(movie)"
+        >
+          {{ movie.title }}
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="content" v-if="selectedMovie">
+    <div class="container-fluid">
+      <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+      <div class="row m-2 d-md-none">
+        <button
+          i18n="ver_listado_completo"
+          class="btn btn-outline-primary col"
+          type="button"
+          (click)="toggleMenu()"
+        >
+          Ver Listado Completo
+        </button>
+      </div>
+      <div class="row mb-3">
+        <div class="col-3 poster">
+          <img
+            [src]="selectedMovie?.poster"
+            [alt]="selectedMovie?.title"
+            fill
+          />
+        </div>
+        <div class="col-9 movie-info">
+          <div
+            class="badge bg-secondary-subtle text-primary-emphasis mb-2 align-self-start mt-3 mt-md-0"
+          >
+            {{ selectedMovie?.genre?.type }}
+          </div>
+          <h1 class="display-5">{{ selectedMovie?.title }}</h1>
+          <div class="item">
+            <strong i18n="estreno">Estreno:</strong>
+            {{ selectedMovie?.releaseDate | date : "MMMM dd, yyyy" }}
+          </div>
+          <div class="item">
+            <strong i18n="director">Director:</strong>
+            {{ selectedMovie?.director?.name }}
+          </div>
+          <div class="item">
+            <strong i18n="duracion">Duración:</strong>
+            {{ selectedMovie?.duration }} minutos
+          </div>
+          <div class="item">
+            <strong i18n="popularidad"
+              >Popularidad: {{ selectedMovie?.popularity }} </strong
+            >/ 5
+          </div>
+          <div class="item">
+            <strong i18n="pais">País:</strong> {{ selectedMovie?.country }}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <h2 class="col-auto fs-3" i18n="actores">Actores</h2>
+      </div>
+      <div class="row">
+        <div
+          class="col-12 col-md-6 col-lg-4 mb-2 mt-2"
+          *ngFor="let actor of selectedMovie?.actors"
+        >
+          <app-actor2-card [actor]="actor"></app-actor2-card>
+        </div>
+      </div>
+      <div class="d-flex">
+        <h2 class="col-auto fs-3 flex-grow-1" i18n="resenas">Reseñas</h2>
+        <button
+          *ngIf="!isCreateReviewOpen"
+          class="btn btn-outline-primary ms-3"
+          (click)="openCreateReview()"
+          i18n="create_review"
+        >
+          Crear Reseña
+        </button>
+      </div>
+      <app-movie-review-create
+        *ngIf="isCreateReviewOpen"
+        [movieId]="selectedMovie?.id"
+        (closed)="closeCreateReview($event)"
+      ></app-movie-review-create>
+      <div class="row reviews">
+        <div
+          class="col-12 review"
+          *ngFor="let review of selectedMovie?.reviews"
+        >
+          <div>
+            <em class="bi bi-star-fill"></em>
+            <strong>{{ review?.score }}</strong
+            >/5
+          </div>
+          <div>
+            <strong>{{ review?.creator }}</strong>
+          </div>
+          <div>{{ review?.text }}</div>
+        </div>
+      </div>
+
+      <div class="d-flex">
+        <h2 class="col-auto fs-3 flex-grow-1" i18n="plataformas">Plataformas</h2>
+        <button
+          *ngIf="!isPlatformOpen"
+          class="btn btn-outline-primary ms-3"
+          (click)="openPlatfoms()"
+          i18n="asociate_platform"
+        >
+          Asociar plataforma
+        </button>
+      </div>
+      <div *ngIf="isPlatformOpen" class="col-12 col-md-5 mt-3">
+        <app-movie-asociate-platform
+        [movieId]="selectedMovie?.id"
+        (closed)="closeCreateReview($event)"
+        ></app-movie-asociate-platform>
+      </div>
+      <div class="row">
+        <div
+          class="col-12 col-md-6 col-lg-4 mb-2 mt-2"
+          *ngFor="let platform of selectedMovie?.platforms"
+        >
+          <a [href]="platform?.url">
+            {{ platform?.name }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

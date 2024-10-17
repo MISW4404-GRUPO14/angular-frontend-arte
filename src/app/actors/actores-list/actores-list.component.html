@@ -1,0 +1,22 @@
+
+
+<div class="container">
+  <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+  <h1 class="text-center display-2" id="title-list" i18n="actores_list">Listado de actores</h1>
+  <div style="display: flex;justify-content: right;">
+    <button  i18n type="button" class="btn btn-primary" routerLink="create" i18n="ingresar_nuevo_actor">Ingresar nuevo actor</button>
+  </div>
+  <div class="row mt-5">
+    <div class="col-12  col-md-6 col-lg-4 col-xl-3 " *ngFor="let actor of actores">
+        <div  class="blog-card blog-card-blog bg-card-dark" >
+          <app-actor-card
+          class="card-actor"
+          [actor]="actor"
+          ></app-actor-card>
+        </div>
+    </div>
+    <div class="card-footer pb-0 pt-3">
+      <app-pagination [items]="allActores" [pageSize]="8" (changePage)="onChangePage($event)"></app-pagination>
+    </div>
+  </div>
+</div>

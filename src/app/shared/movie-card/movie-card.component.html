@@ -1,0 +1,19 @@
+<a
+  class="card mb-3 flex-fill"
+  routerLink="/{{ movie_path }}/{{ movie.id }}"
+  [attr.aria-label]="aria"
+>
+  <img [src]="movie.poster" [alt]="movie.title" fill />
+  <div class="card-body d-flex flex-column">
+    <div
+      class="badge bg-secondary-subtle text-primary-emphasis mb-2 align-self-start"
+    >
+      {{ movie.genre?.type }}
+    </div>
+    <h2 class="card-title fs-6 flex-fill">{{ movie.title }}</h2>
+    <p class="card-text release-date text-secondary">
+      <span i18n class="fw-light">Año de lanzamiento </span>
+      <span class="fw-bold">{{ movie.releaseDate | date : "yyyy" }}</span>
+    </p>
+  </div>
+</a>

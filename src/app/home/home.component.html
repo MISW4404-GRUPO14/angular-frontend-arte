@@ -1,0 +1,60 @@
+<div class="container mb-5">
+  <h1 class="display-1 text-center" i18n>Bienvenido a séptimo arte</h1>
+
+  <div class="row mb-2">
+    <h2 class="fs-3 border-bottom border-secondary" i18n="movies">Películas</h2>
+  </div>
+  <div class="row">
+    <div class="col-6 col-lg-3 d-flex" *ngFor="let movie of movies">
+      <app-movie-card class="flex-fill d-flex" [movie]="movie"></app-movie-card>
+    </div>
+  </div>
+  <div class="row justify-content-end mb-3">
+    <a
+      class="col-auto btn btn-outline-primary"
+      [routerLink]="'/' + movie_path"
+      i18n="view_all_movies"
+      >Ver Todas las películas
+    </a>
+  </div>
+  <div class="row row mb-2">
+    <h2 class="fs-3 border-bottom border-secondary" i18n="actors">Actores</h2>
+  </div>
+  <div class="row">
+    <div
+      class="col-12 col-md-6 col-lg-4 mb-2 mt-2"
+      *ngFor="let actor of actors"
+    >
+      <app-actor2-card [actor]="actor"></app-actor2-card>
+    </div>
+  </div>
+  <div class="row justify-content-end mb-3">
+    <a
+      class="col-auto btn btn-outline-primary"
+      routerLink="/actores"
+      i18n="view_all_actors"
+      >Ver Todos los actores</a
+    >
+  </div>
+  <div class="row row mb-2">
+    <h2 class="fs-3 border-bottom border-secondary" i18n="directors">
+      Directores
+    </h2>
+  </div>
+  <div class="row">
+    <div
+      class="col-12 col-md-6 col-lg-4 mb-2 mt-2"
+      *ngFor="let director of directors"
+    >
+      <app-director2-card [director]="director"></app-director2-card>
+    </div>
+  </div>
+  <div class="row justify-content-end mb-3">
+    <a
+      class="col-auto btn btn-outline-primary"
+      routerLink="/directores"
+      i18n="view_all_directors"
+      >Ver Todos los directores</a
+    >
+  </div>
+</div>

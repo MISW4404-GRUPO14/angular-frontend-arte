@@ -1,0 +1,7 @@
+header {
+  z-index: 1;
+}
+
+.navbar-brand img{
+  height: 60px;
+}

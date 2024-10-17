@@ -1,0 +1,26 @@
+<div class="card mb-3">
+  <a i18n
+    routerLink="/{{pathD}}/{{ director.id }}"
+    [attr.aria-label]="label"
+  >
+    <img [src]="director.photo" [alt]="director.name" fill />
+  </a>
+  <br />
+  <a
+    routerLink="/{{pathD}}/{{ director.id }}"
+    [attr.aria-label]="label"
+  >
+    <h2 class="card-title fs-6 text-center">{{ director.name }}</h2>
+  </a>
+  <div class="card-body">
+    <p class="card-text release-date">
+      <span i18n class="fw-bold">Fecha de Nacimiento: </span>
+      <span class="fw-light">{{
+        director.birthDate | date : "yyyy-mm-dd"
+      }}</span>
+      <br />
+      <span i18n class="fw-bold">Nacionalidad: </span>
+      <span class="fw-light">{{ director.nationality }}</span>
+    </p>
+  </div>
+</div>

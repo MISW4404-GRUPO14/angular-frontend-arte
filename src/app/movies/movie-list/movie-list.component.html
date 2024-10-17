@@ -1,0 +1,27 @@
+<div class="container results">
+  <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+  <div class="d-flex align-items-center mb-3">
+    <h1 class="flex-grow-1 text-center display-2">{{ title }}</h1>
+    <a
+      [routerLink]="createLink"
+      class="btn btn-outline-primary"
+      i18n="create_movies"
+      >Crear Película</a
+    >
+  </div>
+  <div class="row">
+    <div
+      class="col-6 col-md-4 col-lg-3 col-xl-2 d-flex"
+      *ngFor="let movie of movies"
+    >
+      <app-movie-card class="flex-fill d-flex" [movie]="movie"></app-movie-card>
+    </div>
+  </div>
+  <div class="row">
+    <app-pagination
+      [items]="allMovies"
+      [pageSize]="24"
+      (changePage)="onChangePage($event)"
+    ></app-pagination>
+  </div>
+</div>

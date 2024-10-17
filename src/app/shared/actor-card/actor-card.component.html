@@ -1,0 +1,14 @@
+
+ <a [routerLink]="actor.id">
+  <div class="blog-card-image">
+    <img class="img img-fluid"  [src]="actor.photo" [alt]="actor.name">
+  </div>
+</a>
+  <div class="blog-table">
+      <h6 class="blog-category blog-text-success">Actor</h6>
+      <h4 class="blog-card-caption">
+          <div class="card-name">{{actor.name}}</div>
+      </h4>
+      <a [routerLink]="actor.id"><span class="blog-category blog-text-success"i18n="Ver_detalle_actor">Ver detalle del actor</span></a>
+  </div>
+

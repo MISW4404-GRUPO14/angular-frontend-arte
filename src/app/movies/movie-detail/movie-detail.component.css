@@ -1,0 +1,90 @@
+.movie-detail {
+  display: flex;
+}
+
+.movie-detail .movie-list.fixed-top {
+  width: 100%;
+  background: white;
+  margin: 0;
+}
+.movie-detail .movie-list.fixed-top .container-fluid {
+  width: 100%;
+  background: white;
+  height: 100vh;
+}
+
+.movie-detail .movie-list {
+  width: 300px;
+  margin: 0 4px;
+}
+.movie-detail .movie-list .title {
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  padding: 0.5rem 1rem;
+}
+.movie-detail .movie-list .container-fluid {
+  padding: 8px 4px 8px 8px;
+  height: calc(100vh - 295px);
+  overflow-y: auto;
+  border-right: 1px solid #ccc;
+}
+
+.movie-detail .movie-list .container-fluid::-webkit-scrollbar {
+  width: 12px;
+}
+
+.movie-detail .movie-list .container-fluid::-webkit-scrollbar-thumb {
+  background: #b3a9a0;
+  background-clip: content-box;
+  border: 4px solid transparent;
+}
+
+.movie-detail h2 {
+  border-bottom: 1px solid #aaa;
+  display: inline;
+}
+.movie-detail .content {
+  height: calc(100vh - 243px);
+  overflow-y: auto;
+  flex: 1;
+}
+
+.movie-detail .content .poster img {
+  width: 100%;
+}
+
+.movie-detail .item {
+  border-bottom: 1px solid #aaa;
+  padding: 8px;
+}
+
+.movie-detail .actor img {
+  margin-right: 8px;
+  width: 130px;
+}
+.movie-detail .reviews {
+  padding: 0 1rem;
+  margin-bottom: 2rem;
+}
+
+.movie-detail .review {
+  border-bottom: 1px solid #aaa;
+  padding: 1rem;
+}
+
+.movie-detail .review em {
+  margin-right: 0.25rem;
+  color: #ffcc00;
+}
+
+@media (max-width: 768px) {
+  .movie-detail .content,
+  .movie-detail .movie-list .container-fluid {
+    height: auto;
+  }
+}
+
+.container {
+  font-size: 18px;
+
+}

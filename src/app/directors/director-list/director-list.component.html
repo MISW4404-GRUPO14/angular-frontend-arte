@@ -1,0 +1,21 @@
+<div class="container results">
+  <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+  <h1 i18n class="text-center display-2">Listado de Directores</h1>
+
+<div style="display: flex;justify-content: right;">
+  <button  i18n type="button" class="btn btn-primary"  (click)="crearDirector()">Nuevo</button>
+</div>
+<div *ngIf="crearIsOpened == true">
+  <app-director-create [isOpen]="crearIsOpened"></app-director-create>
+</div>
+
+
+<div class="row mt-5" *ngIf="crearIsOpened == false">
+  <div class="col-12 col-md-3 mb-3 d-flex "   *ngFor="let director of pageOfItems">
+    <app-director-card class="flex-fill d-flex" [director]="director"></app-director-card>
+  </div>
+  <div class="card-footer pb-0 pt-3">
+    <app-pagination [items]="directors"  [pageSize]="24"  (changePage)="onChangePage($event)"></app-pagination>
+  </div>
+</div>
+

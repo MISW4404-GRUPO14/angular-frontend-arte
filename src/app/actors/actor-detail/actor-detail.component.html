@@ -1,0 +1,73 @@
+
+<div class="container">
+  <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+  <div class="card border-none">
+    <div class="d-grid gap-2 d-md-flex justify-content-end">
+      <button  routerLink="/actores" type="button" class="btn-close" aria-label="Close"></button>
+    </div>
+      <div *ngIf="actor" class="card-body  ">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div >
+              <img
+                class="img-fluid"
+                src="{{ actor.photo }}"
+                alt="{{ actor.name }}"
+              />
+            </div>
+          </div>
+          <div class="col-12 col-md-6 ">
+              <h3 class="name">{{ actor.name }}</h3>
+              <span><strong>{{ actor.birthDate | date : "yyyy-mm-dd" }}</strong></span>
+              <p class="biography"><bdo dir="ltr">{{ actor.biography }}</bdo></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-5 mt-5 ">
+            <h4 class="inline" i18n="Peliculas_del_actor">Películas del actor</h4>
+            <button (click)="openListado()" class="inline ms-3 ">Asociar película a actor</button>
+            <table  class="table table-striped mt-1 mb-3" aria-describedby="list-movies">
+              <thead>
+                <tr>
+                  <th scope="col" i18n="Nombre_película">Nombre Película</th>
+                  <th scope="col" i18n="Fecha">Fecha</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let movie of actor.movies">
+                  <td>{{movie.title}}</td>
+                  <td>{{ movie.releaseDate | date : "yyyy-mm-dd" }}</td>
+              </tbody>
+            </table>
+          </div>
+          <div *ngIf="listado" class="col-12 col-md-5 mt-3">
+            <div class="card p-3">
+              <div class="d-grid gap-2 d-md-flex justify-content-end ">
+              <button  (click)="closeListado()" type="button" class="btn-close" aria-label="Close"></button>
+              </div>
+              <h4 class="inline" i18n="Listado_de_peliculas">Listado de películas</h4>
+              <div class="search-hero">
+                <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="Ingrese el nombre de la película">
+              </div>
+                <div class="scrollbar">
+                    <table class="table table-striped mt-1 mb-3  " aria-describedby="list-movies">
+                      <thead>
+                        <tr>
+                          <th scope="col">Nombre Película</th>
+                          <th scope="col">Fecha</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let movie of allMovies | filter:searchText">
+                          <td>{{movie.title}}</td>
+                          <td><button (click)="asociateMovie(movie.id)" class="asociar" i18n="Asociar">Asociar</button></td>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+

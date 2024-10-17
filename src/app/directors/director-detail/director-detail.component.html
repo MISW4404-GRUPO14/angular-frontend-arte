@@ -1,0 +1,46 @@
+<div class="container" style="margin: auto">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <img [src]="directors.photo" [alt]="directors.name" fill />
+    </div>
+    <div class="col-8">
+      <h1>{{ directors.name }}</h1>
+      <hr class="linea" />
+      <h3 i18n>Bibliografía</h3>
+      <p>
+        <bdo dir="ltr">{{ directors.biography }}</bdo>
+      </p>
+      <hr class="linea" />
+      <h3 i18n>Fecha de Nacimiento</h3>
+      <p>{{ directors.birthDate }}</p>
+      <hr class="linea" />
+      <h3 i18n>Nacionalidad</h3>
+      <p>{{ directors.nationality }}</p>
+      <hr class="linea" />
+    </div>
+  </div>
+  <hr style="color: black; background-color: black; width: 75%" />
+
+  <h3 i18n>Películas</h3>
+  <hr style="color: black; background-color: black; width: 75%" />
+
+  <section>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="scrollcards">
+          <div
+            class="col-12 col-md-3 mb-3 d-flex"
+            style="margin-bottom: 5rem !important"
+            *ngFor="let movie of directors.movies"
+          >
+            <app-movie-card
+              class="flex-fill d-flex"
+              [movie]="movie"
+            ></app-movie-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr style="color: black; background-color: black; width: 75%" />
+</div>

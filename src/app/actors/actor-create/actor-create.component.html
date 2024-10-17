@@ -1,0 +1,141 @@
+<div class="container mt-3 mb-3">
+  <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+  <h2 class="text-center" i18n="Ingresar_nuevo_actor">Ingresar nuevo actor</h2>
+  <form
+    [formGroup]="actorForm"
+    (ngSubmit)="!actorForm.invalid && createActor(actorForm.value)"
+  >
+  <div class="form-group mx-sm-3 mb-3">
+    <a routerLink="/actores" i18n="Volver_al_listado_de_actores">Volver al listado de actores</a>
+  </div>
+    <!--Name-->
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="name" i18n="Nombre">Nombre</label>
+      <input
+        novalidate
+        id="name"
+        class="form-control"
+        formControlName="name"
+        placeholder="Nombre actor"
+      />
+      <div
+        class="alert alert-danger alert-dismissible fade show"
+        *ngIf="
+          actorForm.get('name')!.hasError('required') &&
+          actorForm.get('name')!.touched
+        "
+        i18n="Nombre_es_requerido"
+      >
+        Nombre es requerido
+      </div>
+      <div
+        class="alert alert-danger alert-dismissible fade show"
+        *ngIf="actorForm.get('name')!.hasError('minlength')"
+        i18n="Nombre_muy_corto"
+      >
+        Nombre muy corto
+      </div>
+    </div>
+
+    <!--Image-->
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="image" i18n="Foto_actor">Foto actor</label>
+      <input
+        novalidate
+        id="photo"
+        class="form-control"
+        formControlName="photo"
+        placeholder="Ingrese la URL de la foto"
+      />
+      <div
+        class="alert alert-danger alert-dismissible fade show"
+        *ngIf="
+          actorForm.get('photo')!.hasError('required') &&
+          actorForm.get('photo')!.touched
+        "
+        i18n="Ingrese_la_url_de_la_foto_del_actor"
+      >
+        Ingrese la URL de la foto del actor
+      </div>
+    </div>
+
+    <div class="form-group mx-sm-3 mb-2">
+      <label i18n for="nationality" i18n="Nacionalidad">Nacionalidad</label>
+      <input novalidate id="nationality" class="form-control" formControlName="nationality" placeholder="Nacionalidad del actor" />
+      <div i18n="Ingrese la Nacionalidad" class="alert alert-danger alert-dismissible fade show"
+        *ngIf="actorForm.get('nationality')!.hasError('required') && actorForm.get('nationality')!.touched">
+        Ingrese la nacionalidad del actor
+      </div>
+    </div>
+
+    <!--Birth Date-->
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="birthDate" i18n="Fecha_de_nacimiento">Fecha nacimiento</label>
+      <input
+        novalidate
+        id="birthDate"
+        class="form-control"
+        formControlName="birthDate"
+        placeholder="Fecha nacimiento"
+        type="date"
+      />
+      <div
+        class="alert alert-danger alert-dismissible fade show"
+        *ngIf="
+          actorForm.get('birthDate')!.hasError('required') &&
+          actorForm.get('birthDate')!.touched
+        "
+        i18n="ingresar_fecha_nacimiento"
+      >
+        Ingrese fecha nacimiento
+      </div>
+    </div>
+
+    <!--Description-->
+    <div class="form-group mx-sm-3 mb-2">
+      <label for="biography" i18n="Biografia">Biografía</label>
+      <textarea
+        novalidate
+        id="biography"
+        class="form-control"
+        formControlName="biography"
+        placeholder="Biografía del actor"
+        rows="8"
+      ></textarea>
+      <div
+        class="alert alert-danger alert-dismissible fade show"
+        *ngIf="
+          actorForm.get('biography')!.hasError('required') &&
+          actorForm.get('biography')!.touched
+        "
+        i18n="ingresar_una_biografia_corta_del_actor"
+      >
+        Ingrese una biografía corta del actor
+      </div>
+      <div
+        class="alert alert-danger alert-dismissible fade show"
+        *ngIf="actorForm.get('biography')!.hasError('maxlength')"
+      >
+        Biografía muy larga
+      </div>
+    </div>
+    <div class="form-group mx-sm-3 mb-2 ">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!actorForm.valid"
+        i18n="Crear_actor"
+      >
+        Crear actor
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger ml-3"
+        (click)="cancelCreation()"
+        i18n="Cancelar_actor"
+      >
+        Cancelar actor
+      </button>
+    </div>
+  </form>
+ </div>

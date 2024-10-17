@@ -1,0 +1,83 @@
+<div class="container mt-4">
+  <h2 class="text-center">Crear Director</h2>
+  <form [formGroup]="directorForm"
+      (ngSubmit)="!directorForm.invalid && createDirector(directorForm.value)">
+
+    <div class="form-group mx-sm-3 mb-2">
+      <label i18n for="name">Nombre</label>
+      <input novalidate id="name" class="form-control" formControlName="name" />
+      <div i18n class="alert alert-danger alert-dismissible fade show"
+        *ngIf="directorForm.get('name')!.hasError('required') && directorForm.get('name')!.touched">
+        Nombre requerido
+      </div>
+
+      <div i18n class="alert alert-danger alert-dismissible fade show"
+        *ngIf="directorForm.get('name')!.hasError('minlength')">
+        Nombre corto
+      </div>
+    </div>
+
+    <div class="form-group mx-sm-3 mb-2">
+      <label i18n for="photo">Foto</label>
+      <input novalidate id="photo" class="form-control" formControlName="photo" placeholder="URL"/>
+      <div i18n class="alert alert-danger alert-dismissible fade show"
+          *ngIf="
+          directorForm.get('photo')!.hasError('required') &&
+          directorForm.get('photo')!.touched">
+          Foto requerida
+      </div>
+    </div>
+
+
+    <div class="form-group mx-sm-3 mb-2">
+      <label i18n for="nationality">Nacionalidad</label>
+      <input novalidate id="nationality" class="form-control" formControlName="nationality" />
+      <div i18n class="alert alert-danger alert-dismissible fade show"
+        *ngIf="directorForm.get('nationality')!.hasError('required') && directorForm.get('nationality')!.touched">
+        Nacionalidad requerida
+      </div>
+    </div>
+
+    <!--Birth Date-->
+    <div class="form-group mx-sm-3 mb-2">
+      <label i18n for="birthDate">Fecha de Nacionamiento</label>
+      <input novalidate id="birthDate" class="form-control" formControlName="birthDate"  type="date"/>
+      <div i18n
+        class="alert alert-danger alert-dismissible fade show"
+        *ngIf="
+          directorForm.get('birthDate')!.hasError('required') &&
+          directorForm.get('birthDate')!.touched">
+        Fecha de Nacimiento requerida
+      </div>
+    </div>
+
+    <!--Bibliografia-->
+    <div class="form-group mx-sm-3 mb-2">
+      <label i18n for="biography">Biografia</label>
+      <input novalidate id="biography" class="form-control" formControlName="biography"/>
+      <div i18n
+        class="alert alert-danger alert-dismissible fade show"
+        *ngIf="
+          directorForm.get('biography')!.hasError('required') &&
+          directorForm.get('biography')!.touched"
+      >
+        Biografia requireda
+      </div>
+      <div i18n
+        class="alert alert-danger alert-dismissible fade show"
+        *ngIf="directorForm.get('biography')!.hasError('maxlength')" >
+        Biografia super el maximo de longitud
+      </div>
+    </div>
+
+    <button i18n type="submit" class="btn btn-primary" [disabled]="!directorForm.valid">
+      Guardar
+    </button>
+
+    <button i18n type="button" class="btn btn-danger ml-3" (click)="cancelCreation()" >
+      Cancelar
+    </button>
+  </form>
+ </div>
+ <br>
+ <br>

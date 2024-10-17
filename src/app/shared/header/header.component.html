@@ -1,0 +1,44 @@
+<header class="position-sticky top-0 start-0 w-100 mb-4">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/" accesskey="h">
+        <img
+          src="/assets/images/logo.png"
+          i18n-alt
+          alt="Logo de la página cinema"
+        />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        (click)="toggleNavigation()"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        [attr.aria-expanded]="isExpanded"
+        aria-label="Alternar Menú de navegación"
+        [ngClass]="{ collapsed: !isExpanded }"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse"
+        [ngClass]="{ show: isExpanded }"
+        id="navbarSupportedContent"
+      >
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item" *ngFor="let route of routes">
+            <a
+              class="nav-link"
+              [routerLink]="route.url"
+              routerLinkActive="active"
+              [routerLinkActiveOptions]="{ exact: route.url === '' }"
+              ariaCurrentWhenActive="page"
+              >{{ route.title }}</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

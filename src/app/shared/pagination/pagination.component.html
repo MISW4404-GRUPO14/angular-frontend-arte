@@ -1,0 +1,19 @@
+<nav aria-label="Page navigation">
+  <ul *ngIf="pager && pager.pages?.length" class="pagination justify-content-center">
+    <li [ngClass]="{ disabled: pager.currentPage === 1 }" class="page-item">
+        <button (click)="setPage(1)" class="page-link" aria-label="Start"> <span aria-hidden="true"><<</span></button>
+    </li>
+    <li [ngClass]="{ disabled: pager.currentPage === 1 }" class="page-item">
+        <button (click)="setPage(pager.currentPage - 1)" class="page-link" aria-label="Previous"><span aria-hidden="true"><</span></button>
+    </li>
+    <li *ngFor="let page of pager.pages" [ngClass]="{ active: pager.currentPage === page }" class="page-item">
+        <button (click)="setPage(page)" class="page-link">{{page}}</button>
+    </li>
+    <li [ngClass]="{ disabled: pager.currentPage === pager.totalPages }" class="page-item">
+        <button (click)="setPage(pager.currentPage + 1)" class="page-link"  aria-label="Next"> <span aria-hidden="true">></span></button>
+    </li>
+    <li [ngClass]="{ disabled: pager.currentPage === pager.totalPages }" class="page-item">
+          <button (click)="setPage(pager.totalPages)" class="page-link" aria-label="End">>></button>
+    </li>
+  </ul>
+</nav>

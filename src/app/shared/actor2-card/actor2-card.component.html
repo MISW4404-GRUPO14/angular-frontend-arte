@@ -1,0 +1,13 @@
+<a
+  routerLink="/actores/{{ actor.id }}"
+  [attr.aria-label]="aria"
+  class="actor row"
+>
+  <img
+    class="col-auto rounded-circle"
+    [src]="actor.photo"
+    [alt]="actor.name"
+    fill
+  />
+  <span class="col">{{ actor.name }}</span>
+</a>

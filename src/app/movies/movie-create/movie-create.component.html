@@ -1,0 +1,512 @@
+<div class="container">
+  <app-breadcrumb [breadcrumbItems]="breadcrumbItems"></app-breadcrumb>
+  <form
+    [formGroup]="movieForm"
+    (ngSubmit)="!movieForm.invalid && createMovie(movieForm.value)"
+  >
+    <h1 class="flex-grow-1 text-center display-5">{{ createMovieTitle }}</h1>
+    <!--Title-->
+    <div class="form-group">
+      <label for="title" i18n>Título</label>
+      <input
+        novalidate
+        id="title"
+        type="text"
+        class="form-control"
+        formControlName="title"
+        i18n-placeholder
+        placeholder="Título de la película"
+        [ngClass]="{
+          'is-invalid':
+            movieForm.get('title')!.touched && movieForm.get('title')!.errors
+        }"
+        i18n-placeholder
+      />
+      <div
+        class="invalid-feedback"
+        *ngIf="
+          movieForm.get('title')!.hasError('required') &&
+          movieForm.get('title')!.touched
+        "
+        i18n
+      >
+        El título es obligatorio
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="movieForm.get('title')!.hasError('minlength')"
+        i18n
+      >
+        El título debe tener al menos
+        {{ movieForm.get("title")!.errors!.minlength.requiredLength }}
+        caracteres
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="movieForm.get('title')!.hasError('maxlength')"
+        i18n
+      >
+        El título puede tener un máximo de
+        {{ movieForm.get("title")!.errors!.maxlength.requiredLength }}
+        caracteres
+      </div>
+    </div>
+
+    <!--Poster-->
+    <div class="form-group">
+      <label for="poster" i18n>Poster</label>
+      <input
+        novalidate
+        id="poster"
+        type="text"
+        class="form-control"
+        formControlName="poster"
+        i18n-placeholder
+        placeholder="Poster de la película"
+        [ngClass]="{
+          'is-invalid':
+            movieForm.get('poster')!.touched && movieForm.get('poster')!.errors
+        }"
+      />
+      <div
+        class="invalid-feedback"
+        *ngIf="
+          movieForm.get('poster')!.hasError('required') &&
+          movieForm.get('poster')!.touched
+        "
+        i18n
+      >
+        El poster es obligatorio
+      </div>
+      <div
+        class="invalid-feedback"
+        *ngIf="movieForm.get('poster')!.hasError('invalidUrl')"
+        i18n
+      >
+        El poster debe ser una URL válida
+      </div>
+    </div>
+
+    <!--Duración-->
+    <div class="form-group">
+      <label for="duration" i18n>Duración</label>
+      <input
+        novalidate
+        id="duration"
+        type="number"
+        class="form-control"
+        formControlName="duration"
+        i18n-placeholder
+        placeholder="Duración de la película en minutos"
+        [ngClass]="{
+          'is-invalid':
+            movieForm.get('duration')!.touched &&
+            movieForm.get('duration')!.errors
+        }"
+      />
+      <div
+        class="invalid-feedback"
+        i18n
+        *ngIf="
+          movieForm.get('duration')!.hasError('required') &&
+          movieForm.get('duration')!.touched
+        "
+      >
+        La duración es obligatoria
+      </div>
+      <div
+        class="invalid-feedback"
+        i18n
+        *ngIf="
+          movieForm.get('duration')!.hasError('min') ||
+          movieForm.get('duration')!.hasError('max')
+        "
+      >
+        La duración debe ser entre 1 y 1000 minutos
+      </div>
+    </div>
+
+    <!--Popularidad-->
+    <div class="form-group">
+      <label for="popularity" i18n>Popularidad</label>
+      <input
+        novalidate
+        id="popularity"
+        type="number"
+        class="form-control"
+        formControlName="popularity"
+        i18n-placeholder
+        placeholder="Popularidad de la película"
+        [ngClass]="{
+          'is-invalid':
+            movieForm.get('popularity')!.touched &&
+            movieForm.get('popularity')!.errors
+        }"
+      />
+      <div
+        class="invalid-feedback"
+        i18n
+        *ngIf="
+          movieForm.get('popularity')!.hasError('required') &&
+          movieForm.get('popularity')!.touched
+        "
+      >
+        La popularidad es obligatoria
+      </div>
+      <div
+        class="invalid-feedback"
+        i18n
+        *ngIf="
+          movieForm.get('popularity')!.hasError('min') ||
+          movieForm.get('popularity')!.hasError('max')
+        "
+      >
+        La popularidad debe ser entre 1 y 100
+      </div>
+    </div>
+
+    <!--País-->
+    <div class="form-group">
+      <label for="country" i18n>País</label>
+      <input
+        novalidate
+        id="country"
+        type="text"
+        class="form-control"
+        formControlName="country"
+        i18n-placeholder
+        placeholder="País de origen de la película"
+        [ngClass]="{
+          'is-invalid':
+            movieForm.get('country')!.touched &&
+            movieForm.get('country')!.errors
+        }"
+      />
+      <div
+        class="invalid-feedback"
+        i18n
+        *ngIf="
+          movieForm.get('country')!.hasError('required') &&
+          movieForm.get('country')!.touched
+        "
+      >
+        El país es obligatorio
+      </div>
+      <div
+        class="invalid-feedback"
+        i18n
+        *ngIf="movieForm.get('country')!.hasError('minlength')"
+      >
+        El país debe tener al menos
+        {{ movieForm.get("country")!.errors!.minlength.requiredLength }}
+        caracteres
+      </div>
+      <div
+        class="invalid-feedback"
+        i18n
+        *ngIf="movieForm.get('country')!.hasError('maxlength')"
+      >
+        El país puede tener un máximo de
+        {{ movieForm.get("country")!.errors!.maxlength.requiredLength }}
+        caracteres
+      </div>
+    </div>
+
+    <!--Fecha de lanzamiento-->
+    <div class="form-group">
+      <label for="releaseDate" i18n>Fecha de lanzamiento</label>
+      <input
+        novalidate
+        id="releaseDate"
+        type="date"
+        class="form-control"
+        formControlName="releaseDate"
+        i18n-placeholder
+        placeholder="País de origen de la película"
+        [ngClass]="{
+          'is-invalid':
+            movieForm.get('releaseDate')!.touched &&
+            movieForm.get('releaseDate')!.errors
+        }"
+      />
+      <div
+        class="invalid-feedback"
+        i18n
+        *ngIf="
+          movieForm.get('releaseDate')!.hasError('required') &&
+          movieForm.get('releaseDate')!.touched
+        "
+      >
+        La fecha de lanzamiento es obligatoria
+      </div>
+    </div>
+
+    <!--Género-->
+    <div class="form-group" formGroupName="genre">
+      <label for="genre" i18n>Género</label>
+      <select
+        name="genre"
+        id="genre"
+        class="form-select"
+        aria-label="Seleccione el género"
+        formControlName="id"
+        [ngClass]="{
+          'is-invalid':
+            movieForm.get('genre.id')!.touched &&
+            movieForm.get('genre.id')!.errors
+        }"
+      >
+        <option value="" i18n>Seleccione un género</option>
+        <option *ngFor="let genre of genres" [value]="genre.id">
+          {{ genre.type }}
+        </option>
+      </select>
+      <div
+        class="invalid-feedback"
+        i18n
+        *ngIf="
+          movieForm.get('genre.id')!.hasError('required') &&
+          movieForm.get('genre.id')!.touched
+        "
+      >
+        El género es obligatorio
+      </div>
+    </div>
+
+    <!--Director-->
+    <div class="form-group" formGroupName="director">
+      <label for="director" i18n>Director</label>
+      <select
+        name="director"
+        id="director"
+        class="form-select"
+        aria-label="Seleccione el director"
+        formControlName="id"
+        [ngClass]="{
+          'is-invalid':
+            movieForm.get('director.id')!.touched &&
+            movieForm.get('director.id')!.errors
+        }"
+      >
+        <option value="" i18n>Seleccione un director</option>
+        <option *ngFor="let director of directors" [value]="director.id">
+          {{ director.name }}
+        </option>
+      </select>
+      <div
+        class="invalid-feedback"
+        i18n
+        *ngIf="
+          movieForm.get('director.id')!.hasError('required') &&
+          movieForm.get('director.id')!.touched
+        "
+      >
+        El director es obligatorio
+      </div>
+    </div>
+
+    <fieldset formGroupName="youtubeTrailer">
+      <legend>Youtube Trailer</legend>
+      <!--_Nombre-->
+      <div class="form-group">
+        <label for="youtubeTrailer.name" i18n>Nombre</label>
+        <input
+          novalidate
+          id="youtubeTrailer.name"
+          type="text"
+          class="form-control"
+          formControlName="name"
+          i18n-placeholder
+          placeholder="Nombre del trailer de youtube"
+          [ngClass]="{
+            'is-invalid':
+              movieForm.get('youtubeTrailer.name')!.touched &&
+              movieForm.get('youtubeTrailer.name')!.errors
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          i18n
+          *ngIf="
+            movieForm.get('youtubeTrailer.name')!.hasError('required') &&
+            movieForm.get('youtubeTrailer.name')!.touched
+          "
+        >
+          El nombre del trailer de youtube es obligatorio
+        </div>
+        <div
+          class="invalid-feedback"
+          i18n
+          *ngIf="movieForm.get('youtubeTrailer.name')!.hasError('minlength')"
+        >
+          El nombre del trailer de youtube debe tener al menos
+          {{
+            movieForm.get("youtubeTrailer.name")!.errors!.minlength
+              .requiredLength
+          }}
+          caracteres
+        </div>
+        <div
+          class="invalid-feedback"
+          i18n
+          *ngIf="movieForm.get('youtubeTrailer.name')!.hasError('maxlength')"
+        >
+          El nombre del trailer de youtube puede tener un máximo de
+          {{
+            movieForm.get("youtubeTrailer.name")!.errors!.maxlength
+              .requiredLength
+          }}
+          caracteres
+        </div>
+      </div>
+
+      <!--URL-->
+      <div class="form-group">
+        <label for="youtubeTrailer.url" i18n>URL</label>
+        <input
+          novalidate
+          id="youtubeTrailer.url"
+          type="text"
+          class="form-control"
+          formControlName="url"
+          i18n-placeholder
+          placeholder="Url del trailer"
+          [ngClass]="{
+            'is-invalid':
+              movieForm.get('youtubeTrailer.url')!.touched &&
+              movieForm.get('youtubeTrailer.url')!.errors
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          i18n
+          *ngIf="
+            movieForm.get('youtubeTrailer.url')!.hasError('required') &&
+            movieForm.get('youtubeTrailer.url')!.touched
+          "
+        >
+          La URL del trailer de youtube es obligatorio.
+        </div>
+        <div
+          class="invalid-feedback"
+          i18n
+          *ngIf="movieForm.get('youtubeTrailer.url')!.hasError('invalidUrl')"
+        >
+          Debe ser una URL válida
+        </div>
+      </div>
+
+      <!--Duración-->
+      <div class="form-group">
+        <label for="youtubeTrailer.duration" i18n>Duración</label>
+        <input
+          novalidate
+          id="youtubeTrailer.duration"
+          type="number"
+          class="form-control"
+          formControlName="duration"
+          i18n-placeholder
+          placeholder="Duración del trailer en minutos"
+          [ngClass]="{
+            'is-invalid':
+              movieForm.get('youtubeTrailer.duration')!.touched &&
+              movieForm.get('youtubeTrailer.duration')!.errors
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          i18n
+          *ngIf="
+            movieForm.get('youtubeTrailer.duration')!.hasError('required') &&
+            movieForm.get('youtubeTrailer.duration')!.touched
+          "
+        >
+          La duración del trailer es obligatoria
+        </div>
+        <div
+          class="invalid-feedback"
+          i18n
+          *ngIf="
+            movieForm.get('youtubeTrailer.duration')!.hasError('min') ||
+            movieForm.get('youtubeTrailer.duration')!.hasError('max')
+          "
+        >
+          La duración del trailer debe ser entre 1 y 1000 minutos
+        </div>
+      </div>
+
+      <!--_Nombre-->
+      <div class="form-group">
+        <label for="youtubeTrailer.channel" i18n>Canal de Youtube</label>
+        <input
+          novalidate
+          id="youtubeTrailer.channel"
+          type="text"
+          class="form-control"
+          formControlName="channel"
+          i18n-placeholder
+          placeholder="Nombre del trailer de youtube"
+          [ngClass]="{
+            'is-invalid':
+              movieForm.get('youtubeTrailer.channel')!.touched &&
+              movieForm.get('youtubeTrailer.channel')!.errors
+          }"
+        />
+        <div
+          class="invalid-feedback"
+          i18n
+          *ngIf="
+            movieForm.get('youtubeTrailer.channel')!.hasError('required') &&
+            movieForm.get('youtubeTrailer.channel')!.touched
+          "
+        >
+          El canal del trailer de youtube es obligatorio
+        </div>
+        <div
+          class="invalid-feedback"
+          i18n
+          *ngIf="movieForm.get('youtubeTrailer.channel')!.hasError('minlength')"
+        >
+          El canal del trailer de youtube debe tener al menos
+          {{
+            movieForm.get("youtubeTrailer.channel")!.errors!.minlength
+              .requiredLength
+          }}
+          caracteres
+        </div>
+        <div
+          class="invalid-feedback"
+          i18n
+          *ngIf="movieForm.get('youtubeTrailer.channel')!.hasError('maxlength')"
+        >
+          El canal del trailer de youtube puede tener un máximo de
+          {{
+            movieForm.get("youtubeTrailer.channel")!.errors!.maxlength
+              .requiredLength
+          }}
+          caracteres
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="d-flex justify-content-end">
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        (click)="cancelCreation()"
+        *ngIf="movieForm.touched"
+        i18n
+      >
+        Limpiar
+      </button>
+      <button
+        class="btn btn-outline-primary"
+        type="submit"
+        [disabled]="!movieForm.valid"
+        i18n
+      >
+        Guardar
+      </button>
+    </div>
+  </form>
+</div>

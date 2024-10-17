@@ -1,0 +1,13 @@
+<a
+  routerLink="/directores/{{ director.id }}"
+  [attr.aria-label]="'Ver detalle de director: ' + director.name"
+  class="director row"
+>
+  <img
+    class="col-auto rounded-circle"
+    [src]="director.photo"
+    [alt]="director.name"
+    fill
+  />
+  <span class="col">{{ director.name }}</span>
+</a>

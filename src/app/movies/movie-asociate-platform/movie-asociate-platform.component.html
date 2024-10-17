@@ -1,0 +1,24 @@
+<div class="row">
+  <h3 class="flex-grow-1 text-center" i18n="asociate_platform">Asociar plataforma</h3>
+
+  <div class="card p-3">
+    <h4 class="inline" i18n="plataformas">Plataformas</h4>
+    <div class="scrollbar">
+      <table class="table table-striped mt-1 mb-3  " aria-describedby="list-platform">
+        <thead>
+          <tr>
+            <th scope="col">Plataforma</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let platform of platforms">
+            <td><a [href]="platform.url">
+              {{ platform.name }}
+            </a></td>
+            <td><button (click)="asociatePlatform(platform.id)"  class="btn btn-outline-primary ms-3"
+              i18n="Asociar">Asociar</button></td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
